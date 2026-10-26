@@ -1,0 +1,13 @@
+services:
+  duckdb:
+    build: .
+    environment:
+      DATABASE_URL: ${DATABASE_URL:?set in .env or via fnox}
+      DUCKDB_HTTP_AUTH: ${DUCKDB_HTTP_AUTH:-}   # "user:password", empty = no auth
+    ports:
+      - "127.0.0.1:9999:9999"
+    volumes:
+      - duckdata:/data
+
+volumes:
+  duckdata:

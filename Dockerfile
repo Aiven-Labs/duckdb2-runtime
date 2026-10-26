@@ -10,5 +10,5 @@ COPY install_extensions.py ./
 RUN uv run python install_extensions.py
 
 COPY server.py ./
-EXPOSE 9999
+EXPOSE 9494
 CMD ["uv", "run", "python", "server.py"]

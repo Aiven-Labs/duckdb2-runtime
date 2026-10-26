@@ -4,7 +4,11 @@ import threading
 
 import duckdb
 
-con = duckdb.connect("/data/local.duckdb")
+# /data is a compose volume locally; on platforms without one (Aiven Runtime) it's
+# just a directory in the container filesystem, so make sure it exists.
+DB_PATH = os.environ.get("DUCKDB_PATH", "/data/local.duckdb")
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+con = duckdb.connect(DB_PATH)
 con.load_extension("postgres")
 con.load_extension("quack")
 

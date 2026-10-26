@@ -9,6 +9,7 @@ RUN uv sync --no-install-project
 COPY install_extensions.py ./
 RUN uv run python install_extensions.py
 
+RUN mkdir -p /data
 COPY server.py ./
 EXPOSE 9494
 CMD ["uv", "run", "python", "server.py"]
